@@ -10,6 +10,7 @@
   "categories": [
     "Formatters"
   ],
+  "activationEvents": [],
   "keywords": [
     "rnstyle",
     "react native style",
