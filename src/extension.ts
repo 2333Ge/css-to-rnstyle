@@ -1,4 +1,9 @@
 import * as vscode from "vscode";
+import {
+  RN_STYLE_KEYS,
+  CSS2RN_STR_KEYS,
+  RN2CSS_NUM_NOT_PX_KEYS,
+} from "./constants";
 
 export function activate(context: vscode.ExtensionContext) {
   let disposableToRnStyle = vscode.commands.registerCommand(
@@ -20,6 +25,7 @@ export function activate(context: vscode.ExtensionContext) {
       });
     }
   );
+
   let disposableToCss = vscode.commands.registerCommand(
     "css-to-rnstyle.convertRnStyleToCss",
     () => {
@@ -43,24 +49,32 @@ export function activate(context: vscode.ExtensionContext) {
 }
 
 function convertCssToRnStyle(cssText: string): string {
+  const deleteIfNotRnKeys = vscode.workspace
+    .getConfiguration("css-to-rnstyle")
+    .get("delete-if-not-rn-keys", true);
+
   let result = cssText;
   result = result.replace(/(\d+)px/g, "$1");
   result = result.replace(/(\d+)em/g, "$1");
   result = result.replace(/-(\w)/g, (_, c) => c.toUpperCase());
   result = result.replace(/;/g, ",");
-  result = result.replace(/:\s*(.*),/g, (match, str: string) => {
-    if (isNaN(Number(str.trim()))) {
-      return match.replace(str, `"${str}"`);
+  result = result.replace(
+    /(\w+)\s*:\s*(.+),/g,
+    (match, p1: string, p2: string) => {
+      if (deleteIfNotRnKeys && RN_STYLE_KEYS.indexOf(p1.trim()) === -1) {
+        return "";
+      }
+      if (isNaN(Number(p2.trim()))) {
+        return match.replace(p2, `"${p2}"`);
+      }
+      if (CSS2RN_STR_KEYS.indexOf(p1.trim()) !== -1) {
+        return match.replace(p2, `"${p2}"`);
+      }
+      return match;
     }
-    return match;
-  });
+  );
   return result;
 }
-
-/**
- * 默认会将number类型的属性加上px除了这些
- */
-const NOT_TRANSFORM_RN_NUM_KEYS = ["opacity", "zIndex", "elevation"];
 
 function convertRnStyleToCss(cssText: string): string {
   let result = cssText;
@@ -76,7 +90,7 @@ function convertRnStyleToCss(cssText: string): string {
       }
       if (
         !isNaN(Number(p2.trim())) &&
-        NOT_TRANSFORM_RN_NUM_KEYS.indexOf(p1.trim()) === -1
+        RN2CSS_NUM_NOT_PX_KEYS.indexOf(p1.trim()) === -1
       ) {
         return match.replace(p2, `${p2}px`);
       }

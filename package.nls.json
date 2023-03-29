@@ -1,0 +1,4 @@
+{
+  "extension-title": "css to rnstyle",
+  "delete-if-not-rn-keys": "是否删除css中的非RN样式"
+}

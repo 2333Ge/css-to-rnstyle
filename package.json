@@ -40,6 +40,18 @@
         "command": "css-to-rnstyle.convertRnStyleToCss",
         "when": "editorTextFocus"
       }
+    ],
+    "configuration": [
+      {
+        "title": "%extension-title%",
+        "properties": {
+          "css-to-rnstyle.delete-if-not-rn-keys": {
+            "type": "boolean",
+            "description": "%delete-if-not-rn-keys%",
+            "default": true
+          }
+        }
+      }
     ]
   },
   "scripts": {
