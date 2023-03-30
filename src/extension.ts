@@ -56,7 +56,9 @@ function convertCssToRnStyle(cssText: string): string {
   let result = cssText;
   result = result.replace(/(\d+)px/g, "$1");
   result = result.replace(/(\d+)em/g, "$1");
-  result = result.replace(/-(\w)/g, (_, c) => c.toUpperCase());
+  result = result.replace(/-(\w)(.*:)/g, (_, p1, p2) => {
+    return `${p1.toUpperCase()}${p2}`;
+  });
   result = result.replace(/;/g, ",");
   result = result.replace(
     /(\w+)\s*:\s*(.+),/g,
