@@ -2,13 +2,18 @@
 
 将css样式和RN样式互相转换
 
+CSS转RN时：
+
+- 支持删除非RN样式的key
+- background 为颜色时转换成 backgroundColor
+
 ## 快捷键
 - `ctrl + 9`：css转RN style
 - `ctrl + 8`：RN style转css
 
-## 配置项
+## 配置
 
-|                  名字                  |  类型   | 默认值 |                      描述                      |
+|                 配置项                 |  类型   | 默认值 |                      描述                      |
 | :------------------------------------: | :-----: | :----: | :--------------------------------------------: |
 | `css-to-rnstyle.delete-if-not-rn-keys` | boolean |  true  | css转RN样式时，是否删除非RN样式的key，默认删除 |
 

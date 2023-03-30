@@ -3,7 +3,7 @@
   "displayName": "css-to-rnstyle",
   "publisher": "2333Ge",
   "description": "css-to-rnstyle",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "icon": "source/logo.png",
   "engines": {
     "vscode": "^1.61.0"
@@ -24,7 +24,11 @@
     "commands": [
       {
         "command": "css-to-rnstyle.convertCssToRnStyle",
-        "title": "切换成RN style 形式"
+        "title": "转换CSS为RN style"
+      },
+      {
+        "command": "css-to-rnstyle.convertRnStyleToCss",
+        "title": "转换RN style为CSS"
       }
     ],
     "keybindings": [

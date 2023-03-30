@@ -61,13 +61,21 @@ function convertCssToRnStyle(cssText: string): string {
   result = result.replace(
     /(\w+)\s*:\s*(.+),/g,
     (match, p1: string, p2: string) => {
-      if (deleteIfNotRnKeys && RN_STYLE_KEYS.indexOf(p1.trim()) === -1) {
+      const key = p1.trim();
+      const value = p2.trim();
+      if (key === "background") {
+        if (p2.indexOf(" ") === -1 && p2.indexOf("url") === -1) {
+          return match.replace(p1, `backgroundColor`).replace(p2, `"${p2}"`);
+        }
+      }
+      if (deleteIfNotRnKeys && RN_STYLE_KEYS.indexOf(key) === -1) {
         return "";
       }
-      if (isNaN(Number(p2.trim()))) {
+      if (isNaN(Number(value))) {
         return match.replace(p2, `"${p2}"`);
       }
-      if (CSS2RN_STR_KEYS.indexOf(p1.trim()) !== -1) {
+
+      if (CSS2RN_STR_KEYS.indexOf(key) !== -1) {
         return match.replace(p2, `"${p2}"`);
       }
       return match;
