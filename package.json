@@ -4,10 +4,7 @@
   "publisher": "2333Ge",
   "description": "css-to-rnstyle",
   "version": "0.0.6",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/2333Ge/css-to-rnstyle"
-  },
+  "repository": "https://github.com/2333Ge/css-to-rnstyle",
   "icon": "source/logo.png",
   "engines": {
     "vscode": "^1.61.0"
@@ -78,7 +75,8 @@
     "watch": "tsc -watch -p ./",
     "pretest": "npm run compile && npm run lint",
     "lint": "eslint src --ext ts",
-    "test": "node ./out/test/runTest.js"
+    "test": "node ./out/test/runTest.js",
+    "build": "./bin/build.sh"
   },
   "devDependencies": {
     "@types/vscode": "^1.61.0",
