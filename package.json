@@ -4,6 +4,10 @@
   "publisher": "2333Ge",
   "description": "css-to-rnstyle",
   "version": "0.0.6",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/2333Ge/css-to-rnstyle"
+  },
   "icon": "source/logo.png",
   "engines": {
     "vscode": "^1.61.0"
@@ -29,6 +33,10 @@
       {
         "command": "css-to-rnstyle.convertRnStyleToCss",
         "title": "转换RN style为CSS"
+      },
+      {
+        "command": "css-to-rnstyle.convertWord",
+        "title": "将选中元素在小驼峰、下划线、中划线间转换"
       }
     ],
     "keybindings": [
@@ -42,6 +50,12 @@
         "key": "ctrl+8",
         "mac": "ctrl+8",
         "command": "css-to-rnstyle.convertRnStyleToCss",
+        "when": "editorTextFocus"
+      },
+      {
+        "key": "ctrl+-",
+        "mac": "ctrl+-",
+        "command": "css-to-rnstyle.convertWord",
         "when": "editorTextFocus"
       }
     ],

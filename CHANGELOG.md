@@ -12,3 +12,8 @@
 ## 0.0.5 - 2023-03-30
 
 CSS转RN时，background 为颜色时转换成 backgroundColor
+
+## 0.0.6 - 2023-04-01
+
+fix: space-between => spaceBetween
+新增小功能：`ctrl + -`：将选中元素在小驼峰、下划线、中划线间转换
