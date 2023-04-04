@@ -54,6 +54,22 @@ export function convertCssToRnStyle(cssText: string): string {
           return match.replace(p1, `backgroundColor`).replace(p2, `"${p2}"`);
         }
       }
+      if (
+        key === "border" ||
+        key === "borderLeft" ||
+        key === "borderRight" ||
+        key === "borderTop" ||
+        key === "borderBottom"
+      ) {
+        const [borderWidth, borderStyle, ...colorRest] = value.split(" ");
+
+        if (colorRest?.length) {
+          return `
+${key}Width:${borderWidth},
+${key}Style:"${borderStyle}",
+${key}Color:"${colorRest.join(" ")}",`;
+        }
+      }
       if (deleteIfNotRnKeys && RN_STYLE_KEYS.indexOf(key) === -1) {
         return "";
       }

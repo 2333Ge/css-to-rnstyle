@@ -6,6 +6,7 @@ CSS转RN时：
 
 - 支持删除非RN样式的key
 - background 为颜色时转换成 backgroundColor
+- border、border-left等属性会转换成borderWidth、borderColor等属性（因缺省时判断是何属性较复杂，暂时均按照 【border: border-width border-style border-color】结构处理）
 
 ![示例1](https://gitee.com/i2333g3/imgs/raw/master/imgs/css-to-rnstyle/css-to-rnstyle-demo.gif)
 
@@ -41,13 +42,18 @@ border: 1px solid #BFBFBF;
 片段2：
 
 ```js
-position: "absolute",
-left: 50,
-top: 192,
-width: 1804,
-height: 1181,
-opacity: 1,
-backgroundColor: "#FFFFFF",
+position: absolute;
+left: 50px;
+top: 192px;
+width: 1804px;
+height: 1181px;
+opacity: 1;
+background-color: #FFFFFF;
+
+
+border-width:1px;
+border-style:solid;
+border-color:#BFBFBF;
 ```
 
 片段3：
@@ -60,6 +66,11 @@ width: 1804px;
 height: 1181px;
 opacity: 1;
 background-color: #FFFFFF;
+
+
+border-width:1px;
+border-style:solid;
+border-color:#BFBFBF;
 ```
 
 `ctrl + 9` 将片段1转换为片段2
