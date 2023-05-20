@@ -5,6 +5,25 @@ import {
   RN2CSS_NUM_NOT_PX_KEYS,
 } from "./constants";
 
+export async function asyncConvertSelection(
+  transform: (text: string) => Promise<string | undefined>
+) {
+  const editor = vscode.window.activeTextEditor;
+  if (!editor) {
+    return;
+  }
+
+  const document = editor.document;
+  const selection = editor.selection;
+  const text = document.getText(selection);
+
+  const convertedText = await transform(text);
+
+  editor.edit((editBuilder) => {
+    editBuilder.replace(selection, convertedText || "处理失败");
+  });
+}
+
 /**
  * 转换选中的文本
  * @param transform 转换函数
