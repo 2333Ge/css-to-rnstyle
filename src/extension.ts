@@ -1,21 +1,11 @@
 import * as vscode from "vscode";
-import {
-  convertSelection,
-  convertWord,
-  convertCssToRnStyle,
-  convertRnStyleToCss,
-  asyncConvertSelection,
-} from "./convertUtils";
-import { getCompletion } from "./ai/ts-mock";
+import { convertSelection, convertWord, convertCssToRnStyle, convertRnStyleToCss } from "./convertUtils";
 
 export function activate(context: vscode.ExtensionContext) {
   let disposableConvertWord = vscode.commands.registerCommand(
     "css-to-rnstyle.convertWord",
     () => {
-      // convertSelection(convertWord);
-      asyncConvertSelection((str) => {
-        return getCompletion(str);
-      });
+      convertSelection(convertWord);
     }
   );
 
